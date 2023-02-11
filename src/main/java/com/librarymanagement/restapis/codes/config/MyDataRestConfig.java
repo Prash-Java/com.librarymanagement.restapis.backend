@@ -1,6 +1,7 @@
 package com.librarymanagement.restapis.codes.config;
 
 import com.librarymanagement.restapis.codes.entity.Book;
+import com.librarymanagement.restapis.codes.entity.Review;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -19,8 +20,13 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
                 HttpMethod.POST,
                 HttpMethod.DELETE
         };
+
         config.exposeIdsFor(Book.class);
+        config.exposeIdsFor(Review.class);
+
         disableHttpMethods(Book.class,config,theUnsupportedActions);
+        disableHttpMethods(Review.class, config, theUnsupportedActions);
+
         /* Configure Cors Mapping*/
         cors.addMapping(config.getBasePath() + "/**")
                 .allowedOrigins(theAllowedOrigins);
