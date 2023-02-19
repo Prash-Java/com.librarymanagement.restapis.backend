@@ -11,7 +11,6 @@ import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 @Configuration
 public class SecurityConfiguration {
 
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         //Disable CSRF
         http.cors().disable();
@@ -19,7 +18,7 @@ public class SecurityConfiguration {
         //Protect endpoints at /api/<type>/secure
         http.authorizeHttpRequests(configurer ->
                 configurer
-                        .requestMatchers("/api/books/secure")
+                        .requestMatchers("/api/books/secure/**")
                         .authenticated())
                 .oauth2ResourceServer()
                 .jwt();
